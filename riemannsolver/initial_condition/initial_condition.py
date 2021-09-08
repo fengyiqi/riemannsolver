@@ -1,0 +1,2 @@
+class InitialCondition:
+    pass

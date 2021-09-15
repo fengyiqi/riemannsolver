@@ -25,14 +25,21 @@ class StiffenedGas(EquationOfState):
         self.mu_shear = mu_shear
         self.mu_bulk = mu_bulk
 
-    def get_pressure(self, rho, rhoU, p):
+    def get_pressure(self, rho, rhoU, E):
         pressure = -self.gamma * self.B
-        pressure += (self.gamma - 1.0) * (self.get_energy(rho, rhoU, p) - 0.5 * rhoU**2 / rho)
+        pressure += (self.gamma - 1.0) * (E - 0.5 * rhoU**2 / rho)
+        return pressure
+
+    def get_pressure(self, rho, rhoU, E):
+        pressure = -self.gamma * self.B
+        pressure += (self.gamma - 1.0) * (E - 0.5 * rhoU**2 / rho)
+        return pressure
 
     def get_speed_of_sound(self, rho, p):
         return np.sqrt(self.gamma * (p + self.B) / rho)
 
     def get_energy(self, rho, rhoU, p):
         energy = p + self.gamma * self.B
-        energy /= (self.gamma - 1.0) + (0.5 * rhoU ** 2) / rho
+        energy /= (self.gamma - 1.0)
+        energy += (0.5 * rhoU ** 2) / rho
         return energy

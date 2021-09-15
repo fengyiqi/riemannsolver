@@ -6,6 +6,7 @@ from ..eos.stiffened_gas import StiffenedGas
 
 class ShockTubeInitialCondition(InitialCondition):
     def __init__(self, mesh: Mesh, rho, vx, p):
+        super().__init__()
         self.rho = rho
         self.vx = vx
         self.p = p

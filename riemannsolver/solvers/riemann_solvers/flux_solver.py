@@ -1,0 +1,2 @@
+class FluxSolver:
+    pass
